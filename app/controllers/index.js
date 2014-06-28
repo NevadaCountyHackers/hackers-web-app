@@ -1,5 +1,5 @@
 'use strict';
 
 exports.home = function(req, res){
-    res.send('Hello Hackers');
+    res.render('index.html');
 };
