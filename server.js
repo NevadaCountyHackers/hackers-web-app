@@ -1,7 +1,11 @@
+'use strict';
+
 var express        = require('express');
 var app            = express();
 var mongoose       = require('mongoose');
 var fs             = require('fs');
+
+if(!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
 
 // Config
 var config         = require('./config');
