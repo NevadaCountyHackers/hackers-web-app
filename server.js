@@ -12,7 +12,7 @@ var config         = require('./config');
 var db             = mongoose.connect(config.db);
 
 // Require models
-var models_path = __dirname + '/app/models';
+var models_path = config.root_dir + '/app/models';
 var model_walk = function(path) {
     fs.readdirSync(path).forEach(function(file) {
         var newPath = path + '/' + file;
@@ -44,7 +44,7 @@ var router = express.Router();
             }
         }
     });
-})(__dirname + '/app/routes');
+})(config.root_dir + '/app/routes');
 
 app.use('/', router);
 

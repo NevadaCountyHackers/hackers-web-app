@@ -2,6 +2,8 @@
 
 var _ = require('lodash');
 
+var root_dir = __dirname + '/..';
+
 var config = {
     app : {
         title : 'Nevada County Hackers',
@@ -9,7 +11,8 @@ var config = {
         footer : 'Hack on! 2014.'
     },
     secret : 'JSIDO*HACKERS4LIFE1BUSDIJNUI@*',
-    sessionCollection : 'sessions'
+    sessionCollection : 'sessions',
+    root_dir : root_dir
 };
 
 var env = require('./env/' + process.env.NODE_ENV + '.js');

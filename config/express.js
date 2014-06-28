@@ -21,9 +21,9 @@ module.exports = function (app, db) {
     }));
 
     // Static Files
-    app.use(express.static(__dirname + '/../public'));
+    app.use(express.static(config.root_dir + '/public'));
 
-    app.set('views', __dirname + '/../app/views');
+    app.set('views', config.root_dir + '/app/views');
 
     app.engine('html', consolidate.swig);
 
