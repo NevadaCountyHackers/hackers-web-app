@@ -18,7 +18,7 @@ gulp.task('lint', function () {
 
 // Concatenate & Minify JS
 gulp.task('scripts', function () {
-    return gulp.src('public/app/*.js')
+    return gulp.src(['public/app/*.js', 'public/app/**/*.js'])
         .pipe(concat('app.js'))
         .pipe(gulp.dest('public/dist'))
         .pipe(rename('app.min.js'))
@@ -36,11 +36,10 @@ gulp.task('watch', function () {
             'public/dist/*.js'
         ]
     })
-        .on('change', ['lint', 'scripts'])
         .on('restart', function () {
             console.log('The Matrix is reloading.');
         });
 });
 
 // Default Task
-gulp.task('default', ['lint', 'watch']);
+gulp.task('default', ['lint', 'scripts', 'watch']);
