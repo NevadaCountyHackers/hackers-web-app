@@ -8,7 +8,7 @@ var fs             = require('fs');
 if(!process.env.NODE_ENV) process.env.NODE_ENV = 'development';
 
 // Config
-var config         = require('./config');
+var config         = require('./config/config');
 var db             = mongoose.connect(config.db);
 
 // Require models
@@ -28,8 +28,12 @@ var model_walk = function(path) {
 };
 model_walk(models_path);
 
+var passport = require('passport');
+
+require('./config/passport')(passport);
+
 // Configure Express and Passport
-require('./config/express')(app, db);
+require('./config/express')(app, db, passport);
 
 var router = express.Router();
 
@@ -40,7 +44,7 @@ var router = express.Router();
         var stat = fs.statSync(newPath);
         if (stat.isFile()) {
             if (/(.*)\.(js$)/.test(file)) {
-                require(newPath)(router);
+                require(newPath)(router, passport);
             }
         }
     });

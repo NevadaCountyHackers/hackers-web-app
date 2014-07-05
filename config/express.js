@@ -6,11 +6,11 @@ var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
 var consolidate    = require('consolidate');
 var compression    = require('compression');
-var config         = require('./index.js');
+var config         = require('./config.js');
 var session        = require('express-session');
 var mongoStore     = require('mean-connect-mongo')(session);
 
-module.exports = function (app, db) {
+module.exports = function (app, db, passport) {
     app.use(compression({
         filter: function (req, res) {
             return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
@@ -55,4 +55,8 @@ module.exports = function (app, db) {
             collection: config.sessionCollection
         })
     }));
+
+    // Passport
+    app.use(passport.initialize());
+    app.use(passport.session());
 };

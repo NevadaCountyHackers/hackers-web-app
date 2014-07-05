@@ -50,6 +50,8 @@
     "compression": "~1.0.8",
     "swig": "~1.3.2",
     "mean-connect-mongo": "~0.4.3",
-    "bower": "~1.3.5"
+    "bower": "~1.3.5",
+    "passport": "~0.2.0",
+    "passport-meetup": "~0.1.2"
   }
 }
