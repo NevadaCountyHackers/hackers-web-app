@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('main', ['ngRoute', 'ngResource', 'ui.route', 'main.system', 'main.index']);
+angular.module('main', ['ngRoute', 'ngResource', 'ui.route', 'main.system', 'main.index', 'main.events']);
 
 angular.module('main.system', []);
 angular.module('main.index', []);
+angular.module('main.events', []);
 'use strict';
 
 //Setting HTML5 Location Mode
@@ -14,19 +15,20 @@ angular.module('main').config(['$locationProvider',
 ]);
 'use strict';
 
-angular.module('main.system').factory('Global', [
+angular.module('main.system')
+    .factory('Global', [
 
-    function() {
-        var obj = this;
+        function () {
+            var obj = this;
 
-        obj._data = {
-            app : window.app || false
-        };
+            obj._data = {
+                app: window.app || false
+            };
 
-        return obj._data;
-    }
+            return obj._data;
+        }
 
-]);
+    ]);
 'use strict';
 
 angular.element(document).ready(function() {
@@ -52,8 +54,30 @@ angular.module('main').config(['$routeProvider',
 'use strict';
 
 angular.module('main.index')
-    .controller('IndexCtrl', ['$scope', '$routeParams', '$http', '$location', 'Global',
-        function ($scope, $routeParams, $http, $location, Global) {
+    .controller('IndexCtrl', ['$scope', '$routeParams', '$http', '$location', 'Global', 'Event',
+        function ($scope, $routeParams, $http, $location, Global, Event) {
             $scope.global = Global;
+
+            $scope.getEvents = function(){
+                Event.query(function(data){
+                    console.log(data);
+                    data.then(function(data){
+                        $scope.events = data;
+                    });
+                });
+            };
+
+            $scope.init = function(){
+                $scope.getEvents();
+            };
         }
     ]);
+'use strict';
+
+angular.module('main.events')
+    .factory('Event', [
+        '$resource',
+        function ($resource) {
+            return $resource("/api/events/:id");
+        }
+     ]);

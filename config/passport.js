@@ -39,12 +39,14 @@ module.exports = function(passport) {
                 if(profile._json && profile._json.results && profile._json.results[0]){
                     profileInfo = profile._json.results[0];
                 }
+
                 if (!user) {
                     console.log(profileInfo);
                     user = new User({
                         name: profileInfo.name,
                         email: profileInfo.email,
-                        meetup: profileInfo
+                        meetup: profileInfo,
+                        accessToken: token
                     });
                     user.save(function(err) {
                         if (err) console.log(err);

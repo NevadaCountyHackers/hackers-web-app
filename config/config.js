@@ -10,6 +10,7 @@ var config = {
         description : 'Hacker\'s meetup in Grass Valley and Nevada County',
         footer : 'Hack on! 2014.'
     },
+    group_urlname : 'Nevada-County-Hackers',
     secret : 'JSIDO*HACKERS4LIFE1BUSDIJNUI@*',
     sessionCollection : 'sessions',
     root_dir : root_dir

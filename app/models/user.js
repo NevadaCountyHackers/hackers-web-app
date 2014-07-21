@@ -24,6 +24,9 @@ var UserSchema = new Schema({
             'Please enter a valid email'
         ]
     },
+    accessToken : {
+        type: String
+    },
     meetup : {}
 });
 

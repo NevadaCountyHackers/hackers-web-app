@@ -1,15 +1,16 @@
 'use strict';
 
-angular.module('main.system').factory('Global', [
+angular.module('main.system')
+    .factory('Global', [
 
-    function() {
-        var obj = this;
+        function () {
+            var obj = this;
 
-        obj._data = {
-            app : window.app || false
-        };
+            obj._data = {
+                app: window.app || false
+            };
 
-        return obj._data;
-    }
+            return obj._data;
+        }
 
-]);
+    ]);
