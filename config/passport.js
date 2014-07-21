@@ -35,6 +35,7 @@ module.exports = function(passport) {
                 if (err) {
                     return done(err);
                 }
+                user.accessToken = token;
                 var profileInfo;
                 if(profile._json && profile._json.results && profile._json.results[0]){
                     profileInfo = profile._json.results[0];
@@ -53,7 +54,10 @@ module.exports = function(passport) {
                         return done(err, user);
                     });
                 } else {
-                    return done(err, user);
+                    user.meetup = profileInfo;
+                    user.save(function(){
+                        return done(err, user);
+                    });
                 }
             });
         }

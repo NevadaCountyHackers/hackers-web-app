@@ -60,10 +60,7 @@ angular.module('main.index')
 
             $scope.getEvents = function(){
                 Event.query(function(data){
-                    console.log(data);
-                    data.then(function(data){
-                        $scope.events = data;
-                    });
+                    $scope.events = data;
                 });
             };
 

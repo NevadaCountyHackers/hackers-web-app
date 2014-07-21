@@ -19,11 +19,25 @@ function init(accessToken){
     });
 }
 
+function convertJSON(json){
+    var obj = {};
+    try{
+        if(typeof json === 'string'){
+            obj = JSON.parse(json);
+        }else{
+            obj = json;
+        }
+    }catch(e){}
+
+    return obj;
+}
+
 var api = {
     events: function (accessToken, params) {
         var deferred = Q.defer();
         var defaults = {
-            group_urlname: config.group_urlname
+            group_urlname: config.group_urlname,
+            per_page: 20
         };
         params = _.extend(defaults, params);
         var api = generateURL('/2/events', params);
@@ -33,7 +47,7 @@ var api = {
                 if(err){
                     deferred.reject(err);
                 }else{
-                    deferred.resolve(data);
+                    deferred.resolve(convertJSON(data));
                 }
             });
 
