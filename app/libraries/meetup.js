@@ -1,6 +1,6 @@
 var Meetup = require('meetup'),
     _ = require('lodash'),
-    Q = require('Q'),
+    Q = require('q'),
     config = require('../../config/config');
 
 function generateURL(api, params) {
